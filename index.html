@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王俊杰 - Junjie Wang</title>
+    <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --accent-color: #e74c3c;
+            --tab-hover: #1e3d6e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px 40px 20px;
+            background: #fff;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 40px 0 20px 0;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .header .en-name {
+            font-size: 1.5em;
+            color: #666;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+        .header .affiliation {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .header .location {
+            color: #888;
+            font-size: 0.95em;
+        }
+
+        /* Contact Links */
+        .contact-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-bar a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: color 0.2s;
+        }
+
+        .contact-bar a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            border: none;
+            background: none;
+            font-size: 1em;
+            color: #666;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section h2 {
+            font-size: 1.3em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+        }
+
+        .section h3 {
+            font-size: 1.1em;
+            color: #444;
+            margin: 18px 0 10px 0;
+            font-weight: 600;
+        }
+
+        /* News */
+        .news-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .news-item::before {
+            content: "📢";
+            position: absolute;
+            left: 0;
+        }
+
+        .news-item .date {
+            color: #888;
+            font-size: 0.85em;
+            margin-right: 8px;
+        }
+
+        /* Research Interests */
+        .interests-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .interest-item {
+            background: var(--light-bg);
+            padding: 12px 15px;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .interest-item strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .interest-item ul {
+            list-style: none;
+            font-size: 0.88em;
+            color: #555;
+        }
+
+        .interest-item li {
+            margin: 2px 0;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .interest-item li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* Publications */
+        .pub-category {
+            margin-bottom: 25px;
+        }
+
+        .pub-category h3 {
+            font-size: 1em;
+            color: #fff;
+            background: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .pub-item {
+            margin-bottom: 6px;
+            padding: 6px 10px;
+            background: var(--light-bg);
+            border-radius: 4px;
+            transition: box-shadow 0.2s;
+            font-size: 0.9em;
+        }
+
+        .pub-item:hover {
+            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+        }
+
+        .pub-item .title {
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 1px;
+        }
+
+        .pub-item .venue {
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        .pub-item .venue strong {
+            color: var(--accent-color);
+        }
+
+        .pub-item .note {
+            color: #888;
+            font-size: 0.8em;
+        }
+
+        /* Students */
+        .student-category {
+            margin-bottom: 18px;
+        }
+
+        .student-category h4 {
+            color: #444;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+            padding-left: 8px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .student-list {
+            list-style: none;
+        }
+
+        .student-list li {
+            padding: 3px 0;
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        .student-list .detail {
+            color: #888;
+            font-size: 0.85em;
+        }
+
+        .student-list .achievement {
+            color: #666;
+            font-size: 0.82em;
+            margin-left: 18px;
+        }
+
+        /* Education & Experience */
+        .timeline {
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 5px;
+            bottom: 5px;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -23px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .timeline-item .period {
+            color: #888;
+            font-size: 0.82em;
+            margin-bottom: 2px;
+        }
+
+        .timeline-item .role {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .timeline-item .org {
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        /* Honors */
+        .honor-item {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 0.9em;
+        }
+
+        .honor-item:last-child {
+            border-bottom: none;
+        }
+
+        .honor-item .year {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* Academic Service */
+        .service-category {
+            margin-bottom: 15px;
+        }
+
+        .service-category h4 {
+            font-size: 0.95em;
+            color: var(--primary-color);
+            margin: 12px 0 8px 0;
+            padding-left: 8px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .service-item {
+            padding: 5px 0;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 0.88em;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-item .title {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .service-item .meta {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .service-item .award {
+            color: var(--accent-color);
+        }
+
+        /* Invited Talks */
+        .talk-item {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 0.9em;
+        }
+
+        .talk-item:last-child {
+            border-bottom: none;
+        }
+
+        .talk-item .date {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 6px;
+        }
+
+        .talk-item .venue {
+            color: #666;
+        }
+
+        .talk-item .title {
+            color: #333;
+            margin-top: 2px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
+            color: #888;
+            font-size: 0.82em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .header .en-name {
+                font-size: 1.2em;
+            }
+            .contact-bar {
+                gap: 10px;
+            }
+            .tab-nav {
+                flex-wrap: wrap;
+            }
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            .interests-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>王俊杰</h1>
+        <p class="en-name">Junjie Wang</p>
+        <p class="affiliation">研究员 / 博士生导师</p>
+        <p class="affiliation">中国科学院软件研究所</p>
+        <p class="location">📍 北京</p>
+        
+        <div class="contact-bar">
+            <a href="mailto:junjie@iscas.ac.cn">📧 junjie@iscas.ac.cn</a>
+            <a href="https://scholar.google.com/citations?hl=zh-CN&user=FkLKCRMAAAAJ" target="_blank">🎓 Google Scholar</a>
+            <a href="https://dblp.org/pid/14/1915-1.html" target="_blank">📚 DBLP</a>
+        </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+        <button class="tab-btn active" onclick="openTab('home')">🏠 Home</button>
+        <button class="tab-btn" onclick="openTab('publications')">📝 Publications</button>
+        <button class="tab-btn" onclick="openTab('students')">👨‍🎓 Students</button>
+        <button class="tab-btn" onclick="openTab('more')">📋 More</button>
+    </nav>
+
+    <!-- Tab: Home -->
+    <div id="home" class="tab-content active">
+        <!-- About -->
+        <section class="section">
+            <h2>👤 About Me</h2>
+            <p>我是中国科学院软件研究所的研究员，博士生导师，智能博弈重点实验室副主任（主持工作），主要从事<strong>智能软件工程</strong>研究。我们团队研究工作涵盖AI驱动的软件开发与测试智能化、面向AI系统的测试与安全、AIGC内容安全等。</p>
+            <br>
+            <p><strong>📖 Experience</strong></p>
+            <ul style="margin: 8px 0 0 20px; color: #555;">
+			    <li><strong>2025.02 - 至今</strong> 智能博弈重点实验室副主任（主持工作），中国科学院软件研究所</li>
+                <li><strong>2022.10 - 至今</strong> 研究员，中国科学院软件研究所</li>
+                <li><strong>2017.10 - 2022.10</strong> 副研究员，中国科学院软件研究所</li>
+                <li><strong>2017.09 - 2018.09</strong> 访问学者，美国北卡罗来纳州立大学</li>
+                <li><strong>2015.07 - 2017.10</strong> 助理研究员，中国科学院软件研究所</li>
+            </ul>
+        </section>
+
+        <!-- News -->
+        <section class="section">
+            <h2>🔥 News</h2>
+            <div class="news-item">
+                <span class="date">[2026.04]</span> 8篇论文被ACL 2026（CCF A）录用，涉及大模型智能体故障归因、内容安全检测、智能体安全、智能体可解释等方面！
+            </div>
+            <div class="news-item">
+                <span class="date">[2026.04]</span> 实验室2名博士、6名硕士毕业论文全盲审意见返回，全部优良！
+            </div>
+            <div class="news-item">
+                <span class="date">[2026.04]</span> 实验室组织《神经符号协同推理现状及思考》"零电力"研讨会！
+            </div>
+        </section>
+
+        <!-- Research Interests -->
+        <section class="section">
+            <h2>💡 Research Interests</h2>
+            <div class="interests-list">
+                <div class="interest-item">
+                    <strong>🤖 AI 驱动的软件工程</strong>
+                    <ul>
+                        <li>大模型辅助软件测试</li>
+                        <li>基于大模型的移动应用测试</li>
+                        <li>智能化代码生成与缺陷修复</li>
+						<li>智能化软件过程服务</li>
+                    </ul>
+                </div>
+                <div class="interest-item">
+                    <strong>🛡️ 面向AI系统的测试与安全</strong>
+                    <ul>
+                        <li>大模型智能体故障归因与增强</li>
+                        <li>多智能体强化学习测试</li>
+                        <li>大模型/智能体安全</li>
+						<li>生成式人工智能内容安全</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Tab: Publications -->
+    <div id="publications" class="tab-content">
+        <!-- 第一类：智能化的软件测试技术 -->
+        <div class="pub-category">
+            <h3>🤖 智能化的软件测试技术</h3>
+            <div class="pub-item">
+                <div class="title">From Suspicious Signals to Crashes: Guiding Bug-driven GUI Testing via Code-inspired Tracing</div>
+                <div class="venue">FSE 2026</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Think Outside the Box: Automating Inter-App Functionality Testing via Memory Implanting and Reasoning</div>
+                <div class="venue">ICSE 2026</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Seeing is Believing: Vision-Driven Non-Crash Functional Bug Detection for Mobile Apps</div>
+                <div class="venue">TSE 2025</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Beyond Static GUI: Agent Evolving LLM-based GUI Testing via Dynamic Memory</div>
+                <div class="venue">ASE 2025</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Standing on the Shoulders of Giants: Bug-Aware Automated GUI Testing via Retrieval Augmentation</div>
+                <div class="venue">FSE 2025</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Unblind Text Inputs: Predicting Hint-text of Text Input in Mobile Apps with LLM</div>
+                <div class="venue">CHI 2024 </div>
+            </div>
+            <div class="pub-item">
+                <div class="title">CrashTranslator: Automatically Reproducing Mobile Application Crashes Directly from Stack Trace</div>
+                <div class="venue">ICSE 2024</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Make LLM a Testing Expert: Bringing Human-like Interaction to Mobile GUI Testing</div>
+                <div class="venue">ICSE 2024</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Testing the Limits: Unusual Text Inputs Generation for Mobile App Crash Detection</div>
+                <div class="venue">ICSE 2024</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">A Roadmap for Software Testing in Open-Collaborative and AI-Powered Era</div>
+                <div class="venue">TOSEM 2024</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Software Testing with Large Language Models: Survey, Landscape, and Vision</div>
+                <div class="venue">TSE 2024 <span class="note">📖 综述论文</span></div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Fill in the Blank: Context-aware Automated Text Input Generation for Mobile GUI Testing</div>
+                <div class="venue">ICSE 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Ex pede Herculem: Augmenting Activity Transition Graph for Apps via Graph Convolution Network</div>
+                <div class="venue">ICSE 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Context-aware Bug Reproduction for Mobile Apps</div>
+                <div class="venue">ICSE 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Nighthawk: Fully Automated Localizing UI Display Issues via Visual Understanding</div>
+                <div class="venue">TSE 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">The Metamorphosis: Automatic Detection of Scaling Issues for Mobile Apps</div>
+                <div class="venue">ASE 2022</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Guided Bug Crush: Assist Manual GUI Testing of Android Apps via Hint Moves</div>
+                <div class="venue">CHI 2022</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">NaviDroid: A Tool for Guiding Manual Android Testing via Hint Moves</div>
+                <div class="venue">ICSE (Demo) 2022</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Context- and Fairness-aware In-process Crowdworker Recommendation</div>
+                <div class="venue">TOSEM 2022</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Context-Aware Personalized Crowdtesting Task Recommendation</div>
+                <div class="venue">TSE 2022</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Characterizing Crowds to Better Optimize Worker Recommendation in Crowdsourced Testing</div>
+                <div class="venue">TSE 2021</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">OwlEyes-Online: A Fully Automated Platform for Detecting and Localizing UI Display Issues</div>
+                <div class="venue">FSE (Demo) 2021</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Owl Eyes: Spotting UI Display Issues via Visual Understanding</div>
+                <div class="venue">ASE 2020</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Context-aware In-process Crowdworker Recommendation</div>
+                <div class="venue">ICSE 2020 </div>
+            </div>
+            <div class="pub-item">
+                <div class="title">iSENSE2.0: Improving Completion-aware Crowdtesting Management</div>
+                <div class="venue">TOSEM 2020</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Quest for the Golden Approach: Duplicate Crowdtesting Reports Detection</div>
+                <div class="venue">ESEM 2020</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">iSENSE: Completion-Aware Crowdtesting Management</div>
+                <div class="venue">ICSE 2019 </div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Images Don't Lie: Duplicate Crowdtesting Reports Detection with Screenshot Information</div>
+                <div class="venue">IST 2019</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Method-level Test Selection for Continuous Integration</div>
+                <div class="venue">QRS 2019</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Domain Adaptation for Test Report Classification in Crowdsourced Testing</div>
+                <div class="venue">ICSE 2017</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Local-Based Active Classification of Test Report to Assist Crowdsourced Testing</div>
+                <div class="venue">ASE 2016</div>
+            </div>
+        </div>
+
+        <!-- 第二类：面向智能算法/智能体的测试和安全 -->
+        <div class="pub-category">
+            <h3>🛡️ 面向智能算法/智能体的测试和安全</h3>
+            <div class="pub-item">
+                <div class="title">Seeing the Whole Elephant: A Benchmark for Failure Attribution in LLM-based Multi-Agent Systems</div>
+                <div class="venue">ACL Main 2026</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">DEFT: Demystifying VLN Failures via a Unified Dual-View Explainability</div>
+                <div class="venue">ACL Main 2026</div>
+            </div>
+			<div class="pub-item">
+                <div class="title">Adversarial Attack on Black-Box Multi-Agent by Adaptive Perturbation</div>
+                <div class="venue">AAAI 2026</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">OntoGuard: Enforcing Action Admissibility for LLM Agents in Complex Interactive Environments</div>
+                <div class="venue">ACL Findings 2026</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Where Did It Go Wrong: Capability-Oriented Failure Attribution for Vision-and-Language Navigation Agents</div>
+                <div class="venue">ACL Findings 2026</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Understanding Individual Agent Importance in Multi-Agent Reinforcement Learning via Counterfactual Reasoning</div>
+                <div class="venue">AAAI 2025</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Demo2Test: Transfer Testing of Agent in Competitive Environment with Failure Demonstrations</div>
+                <div class="venue">TOSEM 2024</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Diversity-Oriented Testing for Competitive Game Agent via Constraint-Guided Adversarial Agent Training</div>
+                <div class="venue">TSE 2024</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Enhancing Multi-agent System Testing with Diversity-Guided Exploration and Adaptive Critical State Exploitation</div>
+                <div class="venue">ISSTA 2024</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Play Guessing Game with LLM: Indirect Jailbreak Attack with Implicit Clues</div>
+                <div class="venue">ACL Findings 2024</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Automatic Static Vulnerability Detection for Machine Learning Libraries: Are We There Yet?</div>
+                <div class="venue">ISSRE 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Fuzzing with Sequence Diversity Inference for Sequential Decision-making Model Testing</div>
+                <div class="venue">ISSRE 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">The Good, the Bad, and the Missing: Neural Code Generation for Machine Learning Tasks</div>
+                <div class="venue">TOSEM 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Automatic Unit Test Generation for Machine Learning Libraries: How Far Are We</div>
+                <div class="venue">ICSE 2021</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">API Recommendation for Machine Learning Libraries: How Far Are We</div>
+                <div class="venue">FSE 2022</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Find Bugs in Static Bug Finders</div>
+                <div class="venue">ICPC 2022 <span class="note">🏆 Distinguished Paper Award</span></div>
+            </div>
+        </div>
+
+        <!-- 第三类：生成式人工智能内容安全 -->
+        <div class="pub-category">
+            <h3>🔒 生成式人工智能内容安全</h3>  
+            <div class="pub-item">
+                <div class="title">SAGE: Synergistic Adaptive Gating of Experts for Hateful Video Detection</div>
+                <div class="venue">ACL Main 2026</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">All Changes May Have Invariant Principles: Improving Ever-Shifting Harmful Meme Detection</div>
+                <div class="venue">ACL Main 2026</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Joint-GCG: Unified Gradient-Based Poisoning Attacks on Retrieval-Augmented Generation Systems</div>
+                <div class="venue">AAAI 2026</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Generative Text-to-Image Retrieval via Hierarchical Identifiers and Semantic Internalization</div>
+                <div class="venue">ACL Findings 2026</div>
+            </div>
+			<div class="pub-item">
+                <div class="title">Know Thy Enemy: Securing LLMs Against Prompt Injection via Diverse Data Synthesis</div>
+                <div class="venue">ACL Findings 2026</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Mimicking the Familiar: Dynamic Command Generation for Information Theft Attacks in LLM Tool-Learning System</div>
+                <div class="venue">ACL Main 2025</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Vulnerability of Text-to-Image Models to Prompt Template Stealing</div>
+                <div class="venue">ACL Findings 2025</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">One Shot Dominance: Knowledge Poisoning Attack on Retrieval-Augmented Generation Systems</div>
+                <div class="venue">EMNLP Findings 2025</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">From Allies to Adversaries: Manipulating LLM Tool-Calling through Adversarial Injection</div>
+                <div class="venue">NAACL 2025</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Repairing Catastrophic-Neglect in Text-to-Image Diffusion Models via Attention-Guided Feature Enhancement</div>
+                <div class="venue">EMNLP Findings 2024</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Defeating Regeneration Attacks by Embedding Watermark into Predicted Noise of Diffusion Models</div>
+                <div class="venue">ICASSP 2024</div>
+            </div>
+        </div>
+
+        <!-- 第四类：智能化代码生成、需求增强等 -->
+        <div class="pub-category">
+            <h3>💻 智能化代码生成、需求增强等</h3>
+            <div class="pub-item">
+                <div class="title">ExpeRepair: Dual-Memory Enhanced LLM-based Repository-Level Program Repair</div>
+                <div class="venue">FSE 2026</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Deep API Sequence Generation via Golden Solution Samples and API Seeds</div>
+                <div class="venue">TOSEM 2025</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Vehicle Domain-Specific Language: Unifying Modeling and Code Generation for Low-Code Automotive Development</div>
+                <div class="venue">ASE Industry 2024</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Cross-Domain Requirements Linking via Adversarial-based Domain Adaptation</div>
+                <div class="venue">ICSE 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">An Empirical Study on the Stability of Explainable Software Defect Prediction</div>
+                <div class="venue">APSEC 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Characterizing and Understanding Software Security Vulnerabilities in Machine Learning Libraries</div>
+                <div class="venue">MSR 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">一种语义感知的细粒度 App 评论缺陷挖掘方法</div>
+                <div class="venue">软件学报 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">CoCoFuzzing: Testing Neural Code Models with Coverage-Guided Fuzzing</div>
+                <div class="venue">ACM TR 2023</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Where is Your App Frustrating Users?</div>
+                <div class="venue">ICSE 2022</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Putting Them under Microscope: A Fine-Grained Approach for Detecting Redundant Test Cases</div>
+                <div class="venue">FSE 2022</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Are We Building on the Rock? On the Importance of Data Preprocessing for Code Summarization</div>
+                <div class="venue">FSE 2022</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Automated Data Function Extraction from Textual Requirements</div>
+                <div class="venue">IST 2022</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">响应时间约束的代码评审人推荐方法</div>
+                <div class="venue">软件学报 2020</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">信息产品及科技服务集成化众测服务研究</div>
+                <div class="venue">中国基础科学 2020</div>
+            </div>
+            <div class="pub-item">
+                <div class="title">Enhancing Unsupervised Requirements Traceability with Sequential Semantics</div>
+                <div class="venue">APSEC 2019</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab: Students -->
+    <div id="students" class="tab-content">
+        <div class="student-category">
+            <h4>在读博士研究生</h4>
+            <ul class="student-list">
+                <li>沐方文 (2020.9 入学)</li>
+                <li>常志远 (2020.9 入学)</li>
+                <li>马序言 (2021.9 入学)</li>
+                <li>陈建明 (2023.9 入学)</li>
+                <li>陈孟卓 (2023.9 入学)</li>
+                <li>王文硕 (2024.9 入学)</li>
+                <li>冯宦翔 (2025.9 入学)</li>
+            </ul>
+        </div>
+
+        <div class="student-category">
+            <h4>在读硕士研究生</h4>
+            <ul class="student-list">
+                <li>王浩伟 (2023.9 入学)</li>
+                <li>张濡芃 (2023.9 入学)</li>
+                <li>薛阳光 (2024.9 入学)</li>
+                <li>代易涵 (2025.9 入学)</li>
+            </ul>
+        </div>
+
+        <div class="student-category">
+            <h4>已毕业博士</h4>
+            <ul class="student-list">
+                <li>刘哲 <span class="detail">(2018-2023) → first job: 中科院软件所 特别研究助理</span></li>
+                <li class="achievement">🏆 中科院院长奖、北京市三好学生、ACM SRC全球总冠军、6篇CCF A</li>
+                <li>黄悦凯 <span class="detail">(2018-2024) → first job: 中科院软件所 特别研究助理</span></li>
+                <li>江子攸 <span class="detail">(2019-2025) → first job: 中科院软件所 特别研究助理</span></li>
+                <li class="achievement">🏆 中科院院长奖、6篇CCF A、ASE杰出论文奖</li>
+                <li>黄宇超 <span class="detail">(2019-2025) → first job: 德国慕尼黑工业大学 博后</span></li>
+                <li class="achievement">3篇CCF A、ICPC杰出论文奖</li>
+            </ul>
+        </div>
+
+        <div class="student-category">
+            <h4>已毕业硕士</h4>
+            <ul class="student-list">
+                <li>苏宇辉 <span class="detail">(2020-2023) → first job: 字节跳动 质量保障</span></li>
+                <li>明旭冉 <span class="detail">(2020-2023) → first job: 中科院软件所 工程师</span></li>
+                <li>王凯锐 <span class="detail">(2021-2024) → first job: 阿里巴巴 高德地图</span></li>
+                <li>闫熠光 <span class="detail">(2021-2024) → first job: 字节跳动 国际电商</span></li>
+                <li>车行 <span class="detail">(2022-2025) → first job: 字节跳动 广告</span></li>
+                <li>李澄 <span class="detail">(2022-2025) → first job: 美国华盛顿大学 读博</span></li>
+                <li>秦昊 <span class="detail">(2022-2025) → first job: 江苏省选调生</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Tab: More -->
+    <div id="more" class="tab-content">
+        <!-- Honors -->
+        <section class="section">
+            <h2>🏆 Honors & Awards</h2>
+			<div class="honor-item">
+                <span class="year">2025</span> ACL 2025 SAC Highlights
+            </div>
+            <div class="honor-item">
+                <span class="year">2024</span> CHI 2024 Best Paper Honorable Mention
+            </div>
+            <div class="honor-item">
+                <span class="year">2023</span> APSEC 2023 Distinguished Paper Award
+            </div>
+            <div class="honor-item">
+                <span class="year">2022</span> ICPC 2022 ACM SIGSOFT Distinguished Paper Award
+            </div>
+            <div class="honor-item">
+                <span class="year">2020</span> ICSE 2020 ACM SIGSOFT Distinguished Paper Award
+            </div>
+            <div class="honor-item">
+                <span class="year">2019</span> ICSE 2019 ACM SIGSOFT Distinguished Paper Award
+            </div>
+            <div class="honor-item">
+                <span class="year">2019</span> QRS 2019 IEEE Best Paper Award
+            </div>
+        </section>
+
+        <!-- Academic Service -->
+        <section class="section">
+            <h2>🎓 Academic Service</h2>
+            
+            <div class="service-category">
+                <h4>期刊任职</h4>
+                <div class="service-item">
+                    <span class="title">Associate Editor</span>
+                    <span class="meta"> — IEEE Transactions on Software Engineering（现任）</span>
+                </div>
+                <div class="service-item">
+                    <span class="title">Review Board</span>
+                    <span class="meta"> — Automated Software Engineering Journal（现任）</span>
+                </div>
+            </div>
+
+            <div class="service-category">
+                <h4>程序委员会成员</h4>
+                <div class="service-item">
+                    <span class="title">ICSE 2025, ASE 2025, ICSME 2025, ISSRE 2025, ESEM 2025, SANER 2025</span>
+                    <span class="meta"> — 2025</span>
+                </div>
+                <div class="service-item">
+                    <span class="title">FSE 2024, ISSRE 2024, ESEM 2024</span>
+                    <span class="meta"> — 2024</span>
+                </div>
+                <div class="service-item">
+                    <span class="title">FSE 2023, ICST 2023</span>
+                    <span class="meta"> — 2023</span>
+                </div>
+            </div>
+
+            <div class="service-category">
+                <h4>会议组织职务</h4>
+                <div class="service-item">
+                    <span class="title">Program Chair</span>
+                    <span class="meta"> — QRS 2024, AI Reliability and Security, UK London</span>
+                </div>
+                <div class="service-item">
+                    <span class="title">Publicity Chair</span>
+                    <span class="meta"> — ISCCP 2024, ESEM 2024</span>
+                </div>
+                <div class="service-item">
+                    <span class="title">Diversity Chair</span>
+                    <span class="meta"> — ICSSP 2023</span>
+                </div>
+            </div>
+
+            <div class="service-category">
+                <h4>论坛主席</h4>
+                <div class="service-item">
+                    <span class="title">中国软件大会 - 智能化软件开发、测试和维护论坛</span>
+                    <span class="meta"> — 2024 西安</span>
+                    <span class="award"> 🏆 优秀论坛奖</span>
+                </div>
+                <div class="service-item">
+                    <span class="title">中国软件大会 - 大模型与软件测试论坛</span>
+                    <span class="meta"> — 2023</span>
+                    <span class="award"> 🏆 优秀论坛奖</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Invited Talks -->
+        <section class="section">
+            <h2>🎤 Invited Talks</h2>
+            <div class="talk-item">
+                <span class="date">2025.11</span>
+                <span class="venue">ChinaSoft 中国软件大会，武汉</span>
+                <div class="title">《软件测试和程序修复中的大模型智能体记忆机制应用》</div>
+            </div>
+            <div class="talk-item">
+                <span class="date">2024.11</span>
+                <span class="venue">ChinaSoft 中国软件大会，西安</span>
+                <div class="title">《面向连续决策场景智能算法的可靠性保障技术》</div>
+            </div>
+            <div class="talk-item">
+                <span class="date">2024.11</span>
+                <span class="venue">ChinaSoft 中国软件大会，西安</span>
+                <div class="title">《从博士生到科研人：在不同身份转换间体会成长感悟》</div>
+            </div>
+            <div class="talk-item">
+                <span class="date">2024.09</span>
+                <span class="venue">英国皇家学会-中国科学院 AI Ethics 论坛，伦敦</span>
+                <div class="title">《Backdoor Attacks and Defenses for Neural Code Models》</div>
+            </div>
+            <div class="talk-item">
+                <span class="date">2024.08</span>
+                <span class="venue">AiDD AI+研发数字峰会，北京</span>
+                <div class="title">《基于多模态大模型的用户界面交互和测试》</div>
+            </div>
+            <div class="talk-item">
+                <span class="date">2024.08</span>
+                <span class="venue">首届华为智能化测试论坛，北京</span>
+                <div class="title">《基于大模型的界面测试》</div>
+            </div>
+            <div class="talk-item">
+                <span class="date">2024.07</span>
+                <span class="venue">中国科学院青年创新促进会信息与管理分会，乌鲁木齐</span>
+                <div class="title">《智能算法与软件测试》</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Last updated: 2026.04</p>
+    </footer>
+
+    <!-- Tab Switching Script -->
+    <script>
+        function openTab(tabName) {
+            // Hide all tab contents
+            var contents = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove('active');
+            }
+            
+            // Remove active class from all buttons
+            var buttons = document.getElementsByClassName('tab-btn');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            
+            // Show the selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
